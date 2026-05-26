@@ -17,28 +17,25 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       elevation: 0,
       scrolledUnderElevation: 0,
       leading: IconButton(
-        icon: const Icon(
-          Icons.arrow_back,
-          color: Colors.black,
-        ),
+        icon: const Icon(Icons.arrow_back, color: Colors.black),
         onPressed: () {
           Navigator.pop;
         },
       ),
       title: Row(
         children: [
-           SvgPicture.asset(
+          SvgPicture.asset(
             'assets/svgs/blue-robot-mascot-logo-icon-design_675467-55-1-_Traced_-_1_.svg',
             height: 40.h,
             width: 24.w,
             color: AppColors.PrimaryColor,
-            ),
-           SizedBox(width: 12.w),
+          ),
+          SizedBox(width: 12.w),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-               Text(
+              Text(
                 'ChatGPT',
                 style: TextStyle(
                   fontSize: 20.sp,
@@ -52,12 +49,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                     width: 8.w,
                     height: 8.h,
                     decoration: const BoxDecoration(
-                      color: Color(0xFF3ABF38), 
+                      color: Color(0xFF3ABF38),
                       shape: BoxShape.circle,
                     ),
                   ),
-                   SizedBox(width: 6.w),
-                   Text(
+                  SizedBox(width: 6.w),
+                  Text(
                     'Online',
                     style: TextStyle(
                       fontSize: 17.sp,
@@ -73,28 +70,20 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       actions: [
         IconButton(
-          icon: const Icon(
-            CupertinoIcons.volume_up,
-            color: Colors.black,
-            size: 26,
-          ),
-          onPressed: () {
-          },
+          icon: Icon(CupertinoIcons.volume_up, color: Colors.black, size: 26.r),
+          onPressed: () {},
         ),
         IconButton(
-          icon: const Icon(
+          icon: Icon(
             CupertinoIcons.share_up,
-            // Icons.file_upload_outlined, 
+            // Icons.file_upload_outlined,
             color: Colors.black,
-            size: 26,
+            size: 26.r,
           ),
-          onPressed: () {
-          },
+          onPressed: () {},
         ),
-         SizedBox(width: 8.w),
+        SizedBox(width: 8.w),
       ],
     );
   }
-
-
 }

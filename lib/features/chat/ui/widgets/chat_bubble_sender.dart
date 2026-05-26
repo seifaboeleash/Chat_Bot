@@ -3,32 +3,31 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ChatBubbleSender extends StatelessWidget {
-   const ChatBubbleSender({
-    super.key,
-   required this.text
-  });
-    final String text ;
+  const ChatBubbleSender({super.key, required this.text});
+  final String text;
   @override
   Widget build(BuildContext context) {
-    return  Align(
+    return Align(
       alignment: Alignment.centerRight,
       child: Container(
-        padding: EdgeInsets.all(16),
-        margin: EdgeInsets.symmetric(horizontal: 16 ,vertical: 8),
+        padding: EdgeInsets.all(16.r),
+        margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
         decoration: BoxDecoration(
-            color: AppColors.PrimaryColor,
-            borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(32.r),
-                topRight: Radius.circular(32.r),
-                bottomLeft: Radius.circular(32.r))),
-                
+          color: AppColors.PrimaryColor,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(32.r),
+            topRight: Radius.circular(32.r),
+            bottomLeft: Radius.circular(32.r),
+          ),
+        ),
+
         child: Text(
           text,
           style: TextStyle(
             color: Colors.white,
             fontSize: 15.sp,
-            fontWeight: FontWeight.bold
-            ),
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
     );

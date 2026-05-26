@@ -9,6 +9,7 @@ class OnBoardingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: const Key('onBoardingScreenScaffold'),
       backgroundColor: Colors.white,
       body:SafeArea(
         child: Padding(

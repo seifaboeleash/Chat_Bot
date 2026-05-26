@@ -32,16 +32,24 @@ dependencies:
   dio: ^5.9.1
   flutter:
     sdk: flutter
+  firebase_auth: ^6.1.4
+  firebase_core: ^4.6.0
   flutter_bloc: ^9.1.1
   flutter_screenutil: ^5.9.3
   flutter_svg: ^2.2.3
+  gap: ^3.0.1
+  get_it: ^9.2.1
   google_fonts: ^8.0.0
-  google_generative_ai: ^0.4.0
+  # google_generative_ai: ^0.4.0
   loading_indicator: ^3.1.1
+  mocktail: ^1.0.4
+  flutter_dotenv: ^6.0.1
 
 dev_dependencies:
   flutter_lints: ^5.0.0
   flutter_test:
+    sdk: flutter
+  integration_test:
     sdk: flutter
 
 # For information on the generic Dart part of this file, see the
@@ -56,6 +64,7 @@ flutter:
   assets:
     - assets/images/
     - assets/svgs/
+    - .env
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
   # For details regarding adding assets from package dependencies, see

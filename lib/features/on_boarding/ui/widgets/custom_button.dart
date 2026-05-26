@@ -1,5 +1,5 @@
 import 'package:chat_bot/core/theme/app_colors.dart';
-import 'package:chat_bot/features/chat/ui/screens/chat_screen.dart';
+import 'package:chat_bot/features/auth/ui/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -10,12 +10,13 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
+      key: const Key('onBoardingContinueButton'),
       color: Colors.transparent,
       child: GestureDetector(
         onTap: () => Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (_) => const ChatScreen(),
+            builder: (_) => const LoginScreen(),
           ),
         ),
         child: Container(

@@ -1,14 +1,15 @@
+import 'package:chat_bot/core/constants/app_constants.dart';
+import 'package:chat_bot/core/errors/app_exception.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 
 class DioApiClient {
-  late Dio _dio;
-  final String baseUrl;
+  late final Dio _dio;
 
-  DioApiClient({required this.baseUrl}) {
+  DioApiClient() {
     _dio = Dio(
       BaseOptions(
-        baseUrl: baseUrl,
+        baseUrl: AppConstants.baseUrl,
         connectTimeout: const Duration(seconds: 30),
         receiveTimeout: const Duration(seconds: 30),
         headers: {
@@ -23,28 +24,29 @@ class DioApiClient {
         onRequest: (options, handler) {
           if (kDebugMode) {
             print('REQUEST[${options.method}] => PATH: ${options.path}');
-            print('DATA: ${options.data}');
           }
           return handler.next(options);
         },
         onResponse: (response, handler) {
           if (kDebugMode) {
-            print('RESPONSE[${response.statusCode}] => PATH: ${response.requestOptions.path}');
-            print('DATA: ${response.data}');
+            print(
+              'RESPONSE[${response.statusCode}] => PATH: ${response.requestOptions.path}',
+            );
           }
           return handler.next(response);
         },
         onError: (DioException e, handler) {
           if (kDebugMode) {
-            print('ERROR[${e.response?.statusCode}] => PATH: ${e.requestOptions.path}');
-            print('MESSAGE: ${e.message}');
+            print(
+              'ERROR[${e.response?.statusCode}] => PATH: ${e.requestOptions.path}',
+            );
           }
           return handler.next(e);
         },
       ),
     );
   }
-// POST Request
+
   Future<Response> post(
     String path, {
     dynamic data,
@@ -52,63 +54,49 @@ class DioApiClient {
     Options? options,
   }) async {
     try {
-      final response = await _dio.post(
+      return await _dio.post(
         path,
         data: data,
         queryParameters: queryParameters,
         options: options,
       );
-      return response;
     } on DioException catch (e) {
       throw _handleError(e);
     }
   }
-  // Error Handler
-  String _handleError(DioException error) {
-    String errorMessage = '';
-    
+
+  /// Maps a [DioException] to a typed [AppException].
+  /// Throws — never returns — so callers get the correct type.
+  Never _handleError(DioException error) {
     switch (error.type) {
       case DioExceptionType.connectionTimeout:
-        errorMessage = 'Connection timeout';
-        break;
       case DioExceptionType.sendTimeout:
-        errorMessage = 'Send timeout';
-        break;
       case DioExceptionType.receiveTimeout:
-        errorMessage = 'Receive timeout';
-        break;
-      case DioExceptionType.badResponse:
-        errorMessage = _handleStatusCode(error.response?.statusCode);
-        break;
-      case DioExceptionType.cancel:
-        errorMessage = 'Request cancelled';
-        break;
+        throw const NetworkException('Connection timed out. Please try again.');
       case DioExceptionType.connectionError:
-        errorMessage = 'No internet connection';
-        break;
+        throw const NetworkException('No internet connection.');
+      case DioExceptionType.badResponse:
+        throw ServerException(
+          _messageFromStatusCode(error.response?.statusCode),
+          statusCode: error.response?.statusCode,
+        );
+      case DioExceptionType.cancel:
+        throw const NetworkException('Request was cancelled.');
       default:
-        errorMessage = 'Something went wrong';
+        throw const NetworkException('Something went wrong. Please try again.');
     }
-    
-    return errorMessage;
   }
 
-  String _handleStatusCode(int? statusCode) {
-    switch (statusCode) {
-      case 400:
-        return 'Bad request';
-      case 401:
-        return 'Unauthorized';
-      case 403:
-        return 'Forbidden';
-      case 404:
-        return 'Not found';
-      case 500:
-        return 'Internal server error';
-      case 502:
-        return 'Bad gateway';
-      default:
-        return 'Error: $statusCode';
-    }
+  String _messageFromStatusCode(int? statusCode) {
+    return switch (statusCode) {
+      400 => 'Bad request.',
+      401 => 'Unauthorized — check your API key.',
+      403 => 'Forbidden.',
+      404 => 'Resource not found.',
+      429 => 'Rate limit reached. Try again later.',
+      500 => 'Internal server error.',
+      502 => 'Bad gateway.',
+      _ => 'Server error (${statusCode ?? 'unknown'}).',
+    };
   }
 }

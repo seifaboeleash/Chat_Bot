@@ -5,4 +5,5 @@ class AppColors{
   static Color textColor = Color(0xff757575);
   static Color messageTextColor = Color(0xff656565);
   static Color chatBubbleRecieverColor = Color(0xffEEEEEE);
+  static Color chatBubbleErrorColor = Colors.red.shade300;
 }

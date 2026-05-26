@@ -1,3 +1,4 @@
+import 'package:chat_bot/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -17,19 +18,28 @@ class ErrorBubble extends StatelessWidget {
       child: Row(
         children: [
           Expanded(
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
-              decoration: BoxDecoration(
-                color: Colors.red.shade300,
-                borderRadius: BorderRadius.circular(12.r),
-              ),
+            child: Align(
+      alignment: Alignment.centerRight,
+      child: Container(
+        padding: EdgeInsets.all(16),
+        margin: EdgeInsets.symmetric(horizontal: 16 ,vertical: 8),
+        decoration: BoxDecoration(
+            color: AppColors.chatBubbleErrorColor,
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(32.r),
+                topRight: Radius.circular(32.r),
+                bottomLeft: Radius.circular(32.r))),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Expanded(
                     child: Text(
                       errorMessage!,
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(
+            color: Colors.white,
+            fontSize: 15.sp,
+            fontWeight: FontWeight.bold
+            ),
                     ),
                   ),
                   IconButton(
@@ -40,6 +50,7 @@ class ErrorBubble extends StatelessWidget {
               ),
             ),
           ),
+          )
         ],
       ),
     );
