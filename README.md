@@ -59,45 +59,6 @@ lib/
 - Flutter SDK (`^3.9.2` or later)
 - A [Google AI Studio](https://aistudio.google.com/) API key for Gemini
 
-### Setup
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/<your-username>/chat_bot.git
-   cd chat_bot
-   ```
-
-2. **Install dependencies**
-   ```bash
-   flutter pub get
-   ```
-
-3. **Set up environment variables**
-
-   Copy the example env file and add your Gemini API key:
-   ```bash
-   cp .env.example .env
-   ```
-   Then edit `.env`:
-   ```
-   GEMINI_API_KEY=your_gemini_api_key_here
-   ```
-
-4. **Run the app**
-   ```bash
-   flutter run
-   ```
-
-### Running Tests
-
-```bash
-flutter test
-flutter analyze
-```
-
-Both currently run clean with zero issues.
-
-
 ## 📄 License
 
 This project is for educational/portfolio purposes.
