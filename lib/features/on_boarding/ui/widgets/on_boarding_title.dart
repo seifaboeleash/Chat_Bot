@@ -13,7 +13,7 @@ class OnBoardingTitle extends StatelessWidget {
           Text(
             'Your AI Assistant',
             style: TextStyle(
-              color: AppColors.PrimaryColor,
+              color: AppColors.primaryColor,
               fontSize: 23.sp,
               fontWeight: FontWeight.w700,
             ),

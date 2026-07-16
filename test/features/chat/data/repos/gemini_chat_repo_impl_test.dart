@@ -2,6 +2,7 @@ import 'package:chat_bot/features/chat/data/models/chat_message_model.dart';
 import 'package:chat_bot/features/chat/data/models/chat_message_part_model.dart';
 import 'package:chat_bot/features/chat/data/repos/gemini_chat_repo_impl.dart';
 import 'package:chat_bot/features/chat/data/services/gemini_chat_service.dart';
+import 'package:chat_bot/core/errors/app_exception.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -31,7 +32,7 @@ void main() {
     test('should throw if messages list is empty', () {
       expect(
         () => geminiChatRepoImpl.sendMessage(messages: []),
-        throwsArgumentError,
+        throwsA(isA<NetworkException>()),
       );
 
       verifyNever(
@@ -48,7 +49,7 @@ void main() {
             ChatMessageModel(parts: [ChatMessagePartModel(text: '')], role: 'user'),
           ],
         ),
-        throwsArgumentError,
+        throwsA(isA<NetworkException>()),
       );
 
       verifyNever(

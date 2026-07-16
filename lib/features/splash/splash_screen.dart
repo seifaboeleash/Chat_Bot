@@ -38,6 +38,7 @@ class _SplashScreenState extends State<SplashScreen>
     _controller.forward();
 
     Future.delayed(const Duration(seconds: 3), () {
+      if (!mounted) return;
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (_) => const OnBoardingScreen()),
@@ -54,7 +55,7 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.PrimaryColor,
+      backgroundColor: AppColors.primaryColor,
       body: Center(
         child: FadeTransition(
           opacity: _fadeAnimation,

@@ -28,7 +28,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             'assets/svgs/blue-robot-mascot-logo-icon-design_675467-55-1-_Traced_-_1_.svg',
             height: 40.h,
             width: 24.w,
-            color: AppColors.PrimaryColor,
+            colorFilter: ColorFilter.mode(AppColors.primaryColor, BlendMode.srcIn),
           ),
           SizedBox(width: 12.w),
           Column(
@@ -40,7 +40,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 style: TextStyle(
                   fontSize: 20.sp,
                   fontWeight: FontWeight.bold,
-                  color: AppColors.PrimaryColor,
+                  color: AppColors.primaryColor,
                 ),
               ),
               Row(

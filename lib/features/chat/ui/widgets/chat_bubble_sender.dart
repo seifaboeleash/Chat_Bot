@@ -13,7 +13,7 @@ class ChatBubbleSender extends StatelessWidget {
         padding: EdgeInsets.all(16.r),
         margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
         decoration: BoxDecoration(
-          color: AppColors.PrimaryColor,
+          color: AppColors.primaryColor,
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(32.r),
             topRight: Radius.circular(32.r),

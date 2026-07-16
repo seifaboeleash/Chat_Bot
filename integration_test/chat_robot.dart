@@ -8,7 +8,10 @@ class ChatRobot {
   ChatRobot({required this.tester});
 
   Future<void> runApp() async {
-    await tester.pumpWidget(ChatBot());
+    await tester.pumpWidget(const ChatBot());
+    await tester.pumpAndSettle();
+    final continueButton = find.byKey(const Key('onBoardingContinueButton'));
+    await tester.tap(continueButton);
     await tester.pumpAndSettle();
   }
 
@@ -19,7 +22,7 @@ class ChatRobot {
   }
 
   Future<void> sendMessage() async {
-    var sendButton = find.byIcon(Icons.send_rounded);
+    var sendButton = find.byIcon(Icons.send);
     await tester.tap(sendButton);
   }
 

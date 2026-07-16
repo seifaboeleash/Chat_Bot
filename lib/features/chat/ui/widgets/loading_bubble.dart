@@ -2,8 +2,8 @@ import 'package:chat_bot/features/chat/ui/widgets/typing_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class loadingBubble extends StatelessWidget {
-  const loadingBubble({
+class LoadingBubble extends StatelessWidget {
+  const LoadingBubble({
     super.key,
   });
 

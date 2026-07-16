@@ -42,7 +42,7 @@ void main() {
       await chatRobot.sendMessage();
       await tester.pump();
       expect(find.widgetWithText(ChatBubbleSender, 'hello'), findsOneWidget);
-      expect(find.byType(loadingBubble), findsOneWidget);
+      expect(find.byType(LoadingBubble), findsOneWidget);
       await tester.pumpAndSettle();
     });
 

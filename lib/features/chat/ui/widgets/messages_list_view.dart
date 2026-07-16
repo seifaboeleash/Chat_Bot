@@ -34,7 +34,7 @@ class MessagesListView extends StatelessWidget {
       itemBuilder: (context, index) {
         // Loading indicator at the end of the list
         if (isLoading && index == messages.length) {
-          return loadingBubble();
+          return const LoadingBubble();
         }
 
         // Error bubble with retry button

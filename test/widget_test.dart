@@ -1,30 +1,27 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
+import 'package:chat_bot/features/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
 import 'package:chat_bot/main.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+  testWidgets('App launch smoke test - reaches SplashScreen', (WidgetTester tester) async {
+    // Set a realistic viewport size matching the design size (375x812) to prevent layout overflows.
+    tester.view.physicalSize = const Size(375, 812);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
     // Build our app and trigger a frame.
     await tester.pumpWidget(const ChatBot());
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    // Verify that SplashScreen is active by finding the logo image by key and type.
+    expect(find.byType(SplashScreen), findsOneWidget);
+    expect(find.byKey(const Key('logoSvg')), findsOneWidget);
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    // Advance the virtual clock by 3 seconds to fire the Splash transition timer.
+    await tester.pump(const Duration(seconds: 3));
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    // Settle the navigation transition to the OnBoardingScreen.
+    await tester.pumpAndSettle();
   });
 }
